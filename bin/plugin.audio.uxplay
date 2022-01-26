@@ -1,0 +1,18 @@
+#!/bin/sh
+
+name="uxplay"
+
+wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | bsdtar -xvf- -C ../resources/lib
+
+docker rm "$name" 2>/dev/null
+docker rmi $(docker images | grep 'uxplay' | grep '<none>' | sed 's/\s\+/\t/g' | cut -f3) 2> /dev/null
+
+docker build -f ../resources/Dockerfile -t test ../resources/lib/UxPlay-master
+
+docker run -v /tmp/.X11-unix:/tmp/.X11-unix \
+           -v /run:/run \
+           -e DISPLAY=$DISPLAY \
+           -e XAUTHORITY=$XAUTHORITY \
+           -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+           --network=host \
+           -it $name
