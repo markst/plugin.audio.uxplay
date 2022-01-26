@@ -2,7 +2,8 @@
 
 name="uxplay"
 
-wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | bsdtar -xvf- -C ../resources/lib
+# download & extract UxPlay
+wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | unzip - -d /storage/.kodi/addons/plugin.audio.uxplay/resources/lib
 
 docker rm "$name" 2>/dev/null
 docker rmi $(docker images | grep 'uxplay' | grep '<none>' | sed 's/\s\+/\t/g' | cut -f3) 2> /dev/null
