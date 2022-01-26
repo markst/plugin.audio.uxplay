@@ -1,6 +1,10 @@
 #!/bin/sh
 
 name="uxplay"
+servicename="$(basename $0)"
+
+. /etc/profile
+oe_setup_addon "$servicename"
 
 # download & extract UxPlay
 wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | unzip - -d /storage/.kodi/addons/plugin.audio.uxplay/resources/lib
