@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.audio.uxplay" name="UxPlay" version="0.0.1" provider-name="Mark Turner, FDH2">
+	<requires>
+		<import addon="service.system.docker" version="0.0.0" />
+	</requires>
+	<extension point="xbmc.service" library="default.py">
+		<provides>audio</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">UxPlay for LibreELEC</summary>
+		<description lang="en">AirPlay 2 support for LibreELEC using UxPlay</description>
+		<license></license>
+		<language></language>
+		<forum></forum>
+		<source>https://github.com/markst/plugin.audio.uxplay</source>
+		<website></website>
+		<email></email>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
