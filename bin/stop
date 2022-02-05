@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. /etc/profile
+
 # stop and remove container
 docker stop uxplay
 
