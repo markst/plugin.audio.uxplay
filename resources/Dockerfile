@@ -8,6 +8,9 @@ RUN apt-get install -yy cmake pkg-config
 
 RUN apt-get install -yy libssl-dev libplist-dev libavahi-compat-libdnssd-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-libav gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-pulseaudio
 
+# hardware-accelerated Intel graphics, but not NVIDIA
+RUN apt-get install -yy gstreamer1.0-vaapi
+
 COPY ./ /uxplay
 
 WORKDIR ./uxplay
