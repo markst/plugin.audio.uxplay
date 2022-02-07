@@ -9,6 +9,8 @@ oe_setup_addon plugin.audio.uxplay
 # check if uxplay is already successful installed
 if [ ! -f "$ADDON_DIR/extract.ok" ]; then
   cd $ADDON_DIR
+  # fix file permissons (zip packaging)
+  chmod +x ./bin/uxplay-downloader
   uxplay-downloader
 fi
 
