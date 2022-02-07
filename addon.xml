@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.audio.uxplay" name="UxPlay" version="0.0.1" provider-name="Mark Turner, FDH2">
 	<requires>
-		<import addon="service.system.docker" version="0.0.0" />
+		<import addon="os.librelec.tv" version="2.0"/>
 	</requires>
 	<extension point="xbmc.service" library="default.py">
 		<provides>audio</provides>
