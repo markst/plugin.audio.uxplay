@@ -14,7 +14,9 @@ if [ -d $ADDON_DIR/uxplay-bin ]; then
   rm -rf $ADDON_DIR/uxplay-bin
 fi
 
+if [ -d $ADDON_DIR/lib ]; then
   rm $ADDON_DIR/lib
+fi
 
 # Use? https://gstreamer.freedesktop.org/src/
 #
@@ -43,6 +45,7 @@ http://ftp.de.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.d
 # install deb's to uxplay-bin directory
 mkdir $ADDON_DIR/uxplay-bin
 
+echo "Installing dependencies"
 for url in $dependencies; do 
     deb=$(curl -w "%{filename_effective}" -LO $url)
     docker run -v $ADDON_DIR:/temp cmd.cat/dpkg-deb dpkg-deb -x ./temp/$deb ./temp/uxplay-bin
