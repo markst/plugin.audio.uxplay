@@ -1,0 +1,59 @@
+#!/bin/bash
+
+. /etc/profile
+oe_setup_addon plugin.audio.uxplay
+
+# TODO: check for enough free disk space
+
+# remove install status and folders
+if [ -f $ADDON_DIR/extract.ok ]; then
+  rm $ADDON_DIR/extract.ok
+fi
+
+if [ -d $ADDON_DIR/uxplay-bin ]; then
+  rm -rf $ADDON_DIR/uxplay-bin
+fi
+
+rm $ADDON_DIR/lib
+
+# Use? https://gstreamer.freedesktop.org/src/
+#
+# .
+#  |-libplist.so.3
+#  |-libffi.so.7
+#  |-libdns_sd.so.1
+#  |-gstreamer-1.0
+#  | |-libgstvideoparsersbad.so
+#  | |-libgstvaapi.so
+#  |-libgstcodecparsers-1.0.so.0
+
+dependencies="
+"
+
+# install deb's to uxplay-bin directory
+mkdir $ADDON_DIR/uxplay-bin
+
+for url in $dependencies; do 
+    deb=$(curl -w "%{filename_effective}" -LO $url)
+    docker run -v $ADDON_DIR:/temp cmd.cat/dpkg-deb dpkg-deb -x ./temp/$deb ./temp/uxplay-bin
+    # strip components & untar? tar xf data.tar.xz --strip-components=4 -C 
+    rm $deb && unset deb
+done
+
+# make symbolic link to lib
+ln -s $ADDON_DIR/uxplay-bin/usr/lib/x86_64-linux-gnu/ $ADDON_DIR/lib
+
+# download & extract UxPlay
+wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | unzip - -d $ADDON_DIR/resources
+
+docker rm "$name" 2>/dev/null
+docker rmi $(docker images | grep 'uxplay' | grep '<none>' | sed 's/\s\+/\t/g' | cut -f3) 2> /dev/null
+
+# build UxPlay using cmake 
+docker build -f $ADDON_DIR/resources/Dockerfile \
+             -t uxplay \
+             $ADDON_DIR/resources/UxPlay-master
+
+docker run -it -v $ADDON_DIR/bin:/release uxplay /bin/bash -c "cp /uxplay/uxplay /release"
+
+touch $ADDON_DIR/extract.ok
