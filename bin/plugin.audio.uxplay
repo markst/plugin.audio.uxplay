@@ -4,7 +4,7 @@ name="uxplay"
 servicename="$(basename $0)"
 
 . /etc/profile
-oe_setup_addon "$servicename"
+oe_setup_addon plugin.audio.uxplay
 
 # check if uxplay is already successful installed
 if [ ! -f "$ADDON_DIR/extract.ok" ]; then
@@ -16,13 +16,16 @@ fi
 pactl load-module module-udev-detect
 pactl set-default-sink alsa_output.pci-0000_04_00.1.hdmi-stereo-extra3
 
-# update LD_LIBRARY_PATH ?
-# export LD_LIBRARY_PATH=$ADDON_DIR/lib
+# update LD_LIBRARY_PATH 
+export LD_LIBRARY_PATH=$ADDON_DIR/lib
 
+# update gstreamer path
 export GST_DEBUG=2
 export GST_PLUGIN_PATH=$ADDON_DIR/lib/gstreamer-1.0
 
 echo $GST_PLUGIN_PATH
+
+sleep 1
 
 $ADDON_DIR/bin/uxplay
 
