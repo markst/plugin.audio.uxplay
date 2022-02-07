@@ -28,6 +28,16 @@ rm $ADDON_DIR/lib
 #  |-libgstcodecparsers-1.0.so.0
 
 dependencies="
+http://ftp.de.debian.org/debian/pool/main/libp/libplist/libplist3_2.0.1~git20190104.3f96731-1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/a/avahi/libavahi-compat-libdnssd1_0.7-4+deb10u1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/a/avahi/libavahi-compat-libdnssd-dev_0.7-4+deb10u1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/g/gstreamer1.0/libgstreamer1.0-dev_1.14.4-1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/g/gst-plugins-base1.0/libgstreamer-plugins-base1.0-dev_1.14.4-2+deb10u1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/g/gst-libav1.0/gstreamer1.0-libav_1.15.0.1+git20180723+db823502-2+deb10u1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/g/gst-plugins-bad1.0/gstreamer1.0-plugins-bad_1.14.4-1+deb10u2_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/g/gst-plugins-bad1.0/libgstreamer-plugins-bad1.0-0_1.14.4-1+deb10u2_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/g/gstreamer-vaapi/gstreamer1.0-vaapi_1.14.4-1_amd64.deb
+http://ftp.de.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.deb
 "
 
 # install deb's to uxplay-bin directory
