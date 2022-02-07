@@ -6,11 +6,11 @@ servicename="$(basename $0)"
 . /etc/profile
 oe_setup_addon "$servicename"
 
-# download & extract UxPlay
-wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | unzip - -d /storage/.kodi/addons/plugin.audio.uxplay/resources/lib
-
-docker rm "$name" 2>/dev/null
-docker rmi $(docker images | grep 'uxplay' | grep '<none>' | sed 's/\s\+/\t/g' | cut -f3) 2> /dev/null
+# check if uxplay is already successful installed
+if [ ! -f "$ADDON_DIR/extract.ok" ]; then
+  cd $ADDON_DIR
+  uxplay-downloader
+fi
 
 # TODO: allow output to be configured: $ALSA_DEVICE
 pactl load-module module-udev-detect
