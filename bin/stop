@@ -1,8 +1,6 @@
 #!/bin/sh
 
-. /etc/profile
-
 # stop and remove container
-docker stop uxplay
+#docker stop uxplay
 
 # TODO: cleanup X11

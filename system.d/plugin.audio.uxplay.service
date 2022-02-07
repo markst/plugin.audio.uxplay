@@ -6,11 +6,13 @@ Requires=network-online.service
 After=network-online.service
 
 [Service]
-Restart=always
-RestartSec=10s
-StartLimitInterval=86400
-StartLimitBurst=3
-TimeoutStartSec=0
+#Restart=always
+#RestartSec=10s
+#StartLimitInterval=86400
+#StartLimitBurst=3
+#TimeoutStartSec=0
+Type=simple
+#PIDFile=/storage/.kodi/addons/%p/bin/uxplay.pid
 ExecStart=/bin/sh /storage/.kodi/addons/%p/bin/%p
 ExecStop=/bin/sh /storage/.kodi/addons/%p/bin/stop
 

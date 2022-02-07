@@ -24,17 +24,16 @@ export GST_PLUGIN_PATH=$ADDON_DIR/lib/gstreamer-1.0
 
 echo $GST_PLUGIN_PATH
 
-# build UxPlay using cmake 
-docker build -f /storage/.kodi/addons/plugin.audio.uxplay/resources/Dockerfile \
-             -t uxplay \
-             /storage/.kodi/addons/plugin.audio.uxplay/resources/lib/UxPlay-master
+$ADDON_DIR/bin/uxplay
 
+: '
 docker run --name="$name" \
-           --network=host \
-           --rm \
-           -v /tmp/.X11-unix:/tmp/.X11-unix \
-           -v /run:/run \
-           -e DISPLAY=$DISPLAY \
-           -e XAUTHORITY=$XAUTHORITY \
-           -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
-           uxplay
+          --network=host \
+          --rm \
+          -v /tmp/.X11-unix:/tmp/.X11-unix \
+          -v /run:/run \
+          -e DISPLAY=$DISPLAY \
+          -e XAUTHORITY=$XAUTHORITY \
+          -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+          uxplay
+'
