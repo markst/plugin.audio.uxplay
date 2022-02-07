@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.audio.uxplay" name="UxPlay" version="0.0.3" provider-name="Mark Turner, FDH2">
+<addon id="plugin.audio.uxplay" name="UxPlay" version="0.0.4" provider-name="Mark Turner, FDH2">
 	<requires>
 		<import addon="service.system.docker" version="0.0.0" />
 	</requires>
