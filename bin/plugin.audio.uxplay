@@ -12,6 +12,10 @@ wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | unzip -
 docker rm "$name" 2>/dev/null
 docker rmi $(docker images | grep 'uxplay' | grep '<none>' | sed 's/\s\+/\t/g' | cut -f3) 2> /dev/null
 
+# TODO: allow output to be configured: $ALSA_DEVICE
+pactl load-module module-udev-detect
+pactl set-default-sink alsa_output.pci-0000_04_00.1.hdmi-stereo-extra3
+
 # build UxPlay using cmake 
 docker build -f /storage/.kodi/addons/plugin.audio.uxplay/resources/Dockerfile \
              -t uxplay \
