@@ -14,7 +14,7 @@ if [ -d $ADDON_DIR/uxplay-bin ]; then
   rm -rf $ADDON_DIR/uxplay-bin
 fi
 
-rm $ADDON_DIR/lib
+  rm $ADDON_DIR/lib
 
 # Use? https://gstreamer.freedesktop.org/src/
 #
@@ -59,11 +59,14 @@ wget -qO- https://github.com/FDH2/UxPlay/archive/refs/heads/master.zip | unzip -
 docker rm "$name" 2>/dev/null
 docker rmi $(docker images | grep 'uxplay' | grep '<none>' | sed 's/\s\+/\t/g' | cut -f3) 2> /dev/null
 
-# build UxPlay using cmake 
+# build UxPlay using cmake
 docker build -f $ADDON_DIR/resources/Dockerfile \
              -t uxplay \
              $ADDON_DIR/resources/UxPlay-master
 
-docker run -it -v $ADDON_DIR/bin:/release uxplay /bin/bash -c "cp /uxplay/uxplay /release"
+echo "Copy installed binary from container to $ADDON_DIR/bin"
+docker run -v $ADDON_DIR/bin:/release uxplay /bin/bash -c "cp /uxplay/uxplay /release/"
 
-touch $ADDON_DIR/extract.ok
+if [ -f $ADDON_DIR/bin/uxplay ]; then
+  touch $ADDON_DIR/extract.ok
+fi
